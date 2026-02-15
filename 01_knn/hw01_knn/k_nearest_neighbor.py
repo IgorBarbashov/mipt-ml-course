@@ -20,6 +20,16 @@ class KNearestNeighbor:
         - y: A numpy array of shape (N,) containing the training labels, where
              y[i] is the label for X[i].
         """
+        """
+        Обучение классификатора. Для алгоритма k-ближайших соседей это просто
+        запоминание обучающих данных.
+
+        Входные данные:
+        - X: Массив numpy формы (num_train, D), содержащий обучающие данные,
+          состоящий из num_train выборок, каждая из которых имеет размерность D.
+        - y: Массив numpy формы (N,), содержащий обучающие метки, где
+          y[i] — метка для X[i].
+        """
         self.X_train = X
         self.y_train = y
 
@@ -37,6 +47,21 @@ class KNearestNeighbor:
         Returns:
         - y: A numpy array of shape (num_test,) containing predicted labels for the
           test data, where y[i] is the predicted label for the test point X[i].
+        
+        ------------------------------------------------------
+
+        Предсказывает метки для тестовых данных с помощью этого классификатора.
+
+        Входные данные:
+        - X: Массив numpy формы (num_test, D), содержащий тестовые данные,
+          из которых num_test выборок имеют размерность D.
+        - k: Количество ближайших соседей, голосующих за предсказанные метки.
+        - num_loops: Определяет, какую реализацию использовать для вычисления расстояний
+          между обучающими и тестовыми точками.
+
+        Возвращает:
+        - y: Массив numpy формы (num_test,), содержащий предсказанные метки для
+          тестовых данных, где y[i] — предсказанная метка для тестовой точки X[i].
         """
         if num_loops == 0:
             dists = self.compute_distances_no_loops(X)
@@ -62,6 +87,20 @@ class KNearestNeighbor:
         - dists: A numpy array of shape (num_test, num_train) where dists[i, j]
           is the Euclidean distance between the ith test point and the jth training
           point.
+
+        ------------------------------------------------------
+
+        Вычисляет расстояние между каждой тестовой точкой в X и каждой обучающей точкой
+        в self.X_train, используя вложенный цикл по обучающим данным и
+        тестовым данным.
+
+        Входные данные:
+        - X: Массив numpy формы (num_test, D), содержащий тестовые данные.
+
+        Возвращает:
+        - dists: Массив numpy формы (num_test, num_train), где dists[i, j]
+          — евклидово расстояние между i-й тестовой точкой и j-й обучающей
+          точкой.
         """
         num_test = X.shape[0]
         num_train = self.X_train.shape[0]
@@ -74,6 +113,14 @@ class KNearestNeighbor:
                 # training point, and store the result in dists[i, j]. You should   #
                 # not use a loop over dimension, nor use np.linalg.norm().          #
                 #####################################################################
+
+                ###########################################################################
+                # TODO:                                                                   #
+                # Вычислите расстояние l2 между i-й тестовой точкой и j-й                 #
+                # обучающей точкой и сохраните результат в dists[i, j]. Вам не следует    #
+                # использовать цикл по измерениям, а также использовать np.linalg.norm(). #
+                ###########################################################################
+
                 # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
                 # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
@@ -85,17 +132,32 @@ class KNearestNeighbor:
         in self.X_train using a single loop over the test data.
 
         Input / Output: Same as compute_distances_two_loops
+
+        ------------------------------------------------------
+
+        Вычислите расстояние между каждой тестовой точкой в X и каждой обучающей точкой
+        в self.X_train, используя один цикл по тестовым данным.
+
+        Входные/выходные данные: То же, что и compute_distances_two_loops
         """
         num_test = X.shape[0]
         num_train = self.X_train.shape[0]
         dists = np.zeros((num_test, num_train))
         for i in range(num_test):
-            #######################################################################
-            # TODO:                                                               #
-            # Compute the l2 distance between the ith test point and all training #
-            # points, and store the result in dists[i, :].                        #
-            # Do not use np.linalg.norm().                                        #
-            #######################################################################
+            ########################################################################
+            # TODO:                                                                #
+            # Compute the l2 distance between the ith test point and all training  #
+            # points, and store the result in dists[i, :].                         #
+            # Do not use np.linalg.norm().                                         #
+            ########################################################################
+
+            ########################################################################
+            # TODO:                                                                #
+            # Вычислить расстояние l2 между i-й тестовой точкой и всеми обучающими #
+            # точками и сохранить результат в dists[i, :].                         #
+            # Не использовать np.linalg.norm().                                    #
+            ########################################################################
+
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
@@ -107,6 +169,13 @@ class KNearestNeighbor:
         in self.X_train using no explicit loops.
 
         Input / Output: Same as compute_distances_two_loops
+
+        ------------------------------------------------------
+
+        Вычисляет расстояние между каждой тестовой точкой в X и каждой обучающей точкой
+        в self.X_train без явных циклов.
+
+        Входные/выходные данные: То же, что и в compute_distances_two_loops
         """
         num_test = X.shape[0]
         num_train = self.X_train.shape[0]
@@ -124,6 +193,21 @@ class KNearestNeighbor:
         # HINT: Try to formulate the l2 distance using matrix multiplication    #
         #       and two broadcast sums.                                         #
         #########################################################################
+
+        #######################################################################################
+        # TODO:                                                                               #
+        # Вычислите расстояние l2 между всеми тестовыми точками и всеми обучающими            #
+        # точками без использования каких-либо явных циклов и сохраните результат в           #
+        # dists.                                                                              #
+        #                                                                                     #
+        # Вам следует реализовать эту функцию, используя только базовые операции с массивами; #
+        # в частности, вам не следует использовать функции из scipy,                          #
+        # а также np.linalg.norm().                                                           #
+        #                                                                                     #
+        # ПОДСКАЗКА: Попробуйте сформулировать расстояние l2, используя умножение матриц      #
+        #            и две широковещательные суммы.                                           #
+        #######################################################################################
+
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
@@ -141,6 +225,19 @@ class KNearestNeighbor:
         Returns:
         - y: A numpy array of shape (num_test,) containing predicted labels for the
           test data, where y[i] is the predicted label for the test point X[i].
+
+        ------------------------------------------------------
+
+        Дана матрица расстояний между тестовыми и обучающими точками.
+        Предскажите метку для каждой тестовой точки.
+
+        Входные данные:
+        - dists: массив numpy формы (num_test, num_train), где dists[i, j]
+          задает расстояние между i-й тестовой точкой и j-й обучающей точкой.
+
+        Возвращает:
+        - y: массив numpy формы (num_test,), содержащий предсказанные метки для
+          тестовых данных, где y[i] — предсказанная метка для тестовой точки X[i].
         """
         num_test = dists.shape[0]
         y_pred = np.zeros(num_test)
@@ -154,9 +251,21 @@ class KNearestNeighbor:
             # neighbors. Store these labels in closest_y.                           #
             # Hint: Look up the function numpy.argsort.                             #
             #########################################################################
+
+            # Список длиной k, хранящий метки k ближайших соседей к
+            # i-й тестовой точке.
+            ########################################################################
+            # TODO:                                                                #
+            # Используйте матрицу расстояний, чтобы найти k ближайших соседей i-й  #
+            # тестовой точки, и используйте self.y_train, чтобы найти метки этих   #
+            # соседей. Сохраните эти метки в closest_y.                            #
+            # Подсказка: найдите функцию numpy.argsort.                            #
+            ########################################################################
+
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+
             #########################################################################
             # TODO:                                                                 #
             # Now that you have found the labels of the k nearest neighbors, you    #
@@ -164,9 +273,16 @@ class KNearestNeighbor:
             # Store this label in y_pred[i]. Break ties by choosing the smaller     #
             # label.                                                                #
             #########################################################################
+
+            ############################################################################
+            # TODO:                                                                    #
+            # Теперь, когда вы нашли метки k ближайших соседей, вам                    #
+            # нужно найти наиболее часто встречающуюся метку в списке closest_y меток. #
+            # Сохраните эту метку в y_pred[i]. В случае совпадения выбирайте меньшую   #
+            # метку.                                                                   #
+            ############################################################################
+
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
         return y_pred
