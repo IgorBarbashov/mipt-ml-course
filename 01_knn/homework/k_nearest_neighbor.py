@@ -214,8 +214,11 @@ class KNearestNeighbor:
         #######################################################################################
 
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-        pass
-
+        X_sum_of_square = np.sum(X ** 2, axis=1)
+        X_train_sum_of_square = np.sum(self.X_train ** 2, axis=1)
+        scalar_product = X @ self.X_train.T
+        square_of_dists = X_sum_of_square[:, None] + X_train_sum_of_square[None, :] - 2 * scalar_product
+        dists = np.sqrt(np.maximum(square_of_dists, 0.0))
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 
