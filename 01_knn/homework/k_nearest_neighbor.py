@@ -269,8 +269,8 @@ class KNearestNeighbor:
             ########################################################################
 
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-            pass
-
+            idx = np.argpartition(dists[i], k)[:k]
+            closest_y = self.y_train[idx]
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
             #########################################################################
@@ -290,7 +290,8 @@ class KNearestNeighbor:
             ############################################################################
 
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-            pass
-
+            closest_y, frequencies_y = np.unique(closest_y, return_counts=True)
+            max_frequence_y = frequencies_y.max()
+            y_pred[i] = closest_y[frequencies_y == max_frequence_y].min()
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return y_pred
