@@ -1,10 +1,12 @@
 import numpy as np
+
 """
 Credits: the original code belongs to Stanford CS231n course assignment1. Source link: http://cs231n.github.io/assignments2019/assignment1/
 """
 
+
 class KNearestNeighbor:
-    """ a kNN classifier with L2 distance """
+    """a kNN classifier with L2 distance"""
 
     def __init__(self):
         pass
@@ -18,9 +20,10 @@ class KNearestNeighbor:
         - X: A numpy array of shape (num_train, D) containing the training data
           consisting of num_train samples each of dimension D.
         - y: A numpy array of shape (N,) containing the training labels, where
-             y[i] is the label for X[i].
-        """
-        """
+              y[i] is the label for X[i].
+
+        ------------------------------------------------------
+
         Обучение классификатора. Для алгоритма k-ближайших соседей это просто
         запоминание обучающих данных.
 
@@ -39,7 +42,7 @@ class KNearestNeighbor:
 
         Inputs:
         - X: A numpy array of shape (num_test, D) containing test data consisting
-             of num_test samples each of dimension D.
+              of num_test samples each of dimension D.
         - k: The number of nearest neighbors that vote for the predicted labels.
         - num_loops: Determines which implementation to use to compute distances
           between training points and testing points.
@@ -47,7 +50,7 @@ class KNearestNeighbor:
         Returns:
         - y: A numpy array of shape (num_test,) containing predicted labels for the
           test data, where y[i] is the predicted label for the test point X[i].
-        
+
         ------------------------------------------------------
 
         Предсказывает метки для тестовых данных с помощью этого классификатора.
@@ -70,7 +73,7 @@ class KNearestNeighbor:
         elif num_loops == 2:
             dists = self.compute_distances_two_loops(X)
         else:
-            raise ValueError('Invalid value %d for num_loops' % num_loops)
+            raise ValueError("Invalid value %d for num_loops" % num_loops)
 
         return self.predict_labels(dists, k=k)
 
@@ -122,7 +125,7 @@ class KNearestNeighbor:
                 ###########################################################################
 
                 # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
+                pass
                 # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
 
@@ -159,6 +162,7 @@ class KNearestNeighbor:
             ########################################################################
 
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+            pass
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
@@ -209,6 +213,7 @@ class KNearestNeighbor:
         #######################################################################################
 
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+        pass
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return dists
@@ -263,6 +268,7 @@ class KNearestNeighbor:
             ########################################################################
 
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+            pass
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -283,6 +289,7 @@ class KNearestNeighbor:
             ############################################################################
 
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+            pass
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return y_pred
